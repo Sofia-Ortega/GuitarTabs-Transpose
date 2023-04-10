@@ -45,19 +45,64 @@ function halfStep(note, increase, flatMode) {
     }
     return newNote;
 }
+function addFrillings(newBaseNote, oldNote) {
+    var frillings;
+    if (oldNote.includes("#") || oldNote.includes("b")) {
+        // remove characters
+        frillings = oldNote.substring(2);
+    }
+    else {
+        frillings = oldNote.substring(1);
+    }
+    var newNote = newBaseNote + frillings;
+    return newNote;
+}
 function increaseHalfStep(note) {
-    return halfStep(note, true, SHARP_MODE);
+    if (note.includes("/")) {
+        var index = note.indexOf("/");
+        var firstNote = increaseHalfStep(note.substring(0, index));
+        var secondNote = increaseHalfStep(note.substring(index + 1));
+        return firstNote + "/" + secondNote;
+    }
+    var newBaseNote = halfStep(note, true, SHARP_MODE);
+    return addFrillings(newBaseNote, note);
 }
 function decreaseHalfStep(note) {
-    return halfStep(note, false, SHARP_MODE);
+    if (note.includes("/")) {
+        var index = note.indexOf("/");
+        var firstNote = decreaseHalfStep(note.substring(0, index));
+        var secondNote = decreaseHalfStep(note.substring(index + 1));
+        return firstNote + "/" + secondNote;
+    }
+    var newBaseNote = halfStep(note, false, SHARP_MODE);
+    return addFrillings(newBaseNote, note);
 }
+function increaseStep(noteStr, step) {
+    if (noteStr.includes("/")) {
+        var index = noteStr.indexOf("/");
+        var firstNote = increaseHalfStep(noteStr.substring(0, index));
+        var secondNote = increaseHalfStep(noteStr.substring(index + 1));
+        return firstNote + "/" + secondNote;
+    }
+}
+// -------------- TESTING -------------------
 var INCREASING = true;
-for (var i = 0; i < NOTES_SHARPS.length; i++) {
-    console.log(increaseHalfStep(NOTES_SHARPS[i]));
-}
-console.log("---------------");
-for (var i = 0; i < NOTES_SHARPS.length; i++) {
-    console.log(decreaseHalfStep(NOTES_SHARPS[i]));
+// for(var i = 0; i < NOTES_SHARPS.length; i++) {
+//     console.log(increaseHalfStep(NOTES_SHARPS[i]))
+// }
+// for(var i = 0; i < NOTES_SHARPS.length; i++) {
+//     console.log(decreaseHalfStep(NOTES_SHARPS[i]))
+// }
+var testNotes = ['D', 'G', 'Bm', 'A', 'Bm', 'A/C#', 'D', 'G', 'Bm', 'A', 'D',
+    'A', 'Bm', 'A', 'G', 'D/F#', 'A', 'Bm', 'A', 'G', 'D', 'G', 'Bm', 'A', 'Bm',
+    'A/C#', 'D', 'G', 'Bm', 'A', 'D', 'A', 'Bm', 'A', 'G', 'D/F#', 'A', 'Bm', 'A',
+    'G', 'Bm', 'A', 'G', 'G', 'A', 'Bm7', 'F#m', 'G', 'A', 'Bm7', 'A', 'G', 'A', 'Bm7',
+    'F#m7', 'G', 'A', 'Bm7', 'A', 'G', 'A', 'Bm7', 'F#m7', 'G', 'A', 'Bm7', 'A',
+    'D', 'A', 'Bm7', 'A', 'G', 'D/F#', 'A', 'Bm7', 'A', 'G', 'D', 'A', 'Bm', 'A',
+    'G', 'D/F#', 'A', 'Bm7', 'A', 'G', 'G', 'A', 'Bm7', 'F#m7', 'G', 'A', 'Bm7', 'A', 'D',
+    'A', 'Bm', 'A', 'G'];
+for (var i = 0; i < testNotes.length; i++) {
+    console.log(increaseHalfStep(testNotes[i]));
 }
 /*
 var chordsClassName = "fciXY _Oy28";
