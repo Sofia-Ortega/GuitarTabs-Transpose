@@ -3,6 +3,9 @@ const NOTES_SHARPS = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#"
 const NOTES_FLATS = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"]
 const TOTAL_NOTES_COUNT = 12;
 
+const SHARP_MODE = false;
+const FLAT_MODE = true;
+
 // makes sure that index is in range
 function boundIndex(index) {
     if (index >= TOTAL_NOTES_COUNT) {
@@ -55,15 +58,25 @@ function halfStep(note, increase, flatMode=false) {
 }
 
 
-
-var INCREASING = true;
-var FLAT_MODE = true;
-
-for(var i = 0; i < NOTES_SHARPS.length; i++) {
-    console.log(halfStep(NOTES_FLATS[i], !INCREASING, FLAT_MODE));
+function increaseHalfStep(note) {
+    return halfStep(note, true, SHARP_MODE)
 }
 
+function decreaseHalfStep(note) {
+    return halfStep(note, false, SHARP_MODE)
+}
 
+var INCREASING = true;
+
+for(var i = 0; i < NOTES_SHARPS.length; i++) {
+    console.log(increaseHalfStep(NOTES_SHARPS[i]))
+}
+
+console.log("---------------")
+
+for(var i = 0; i < NOTES_SHARPS.length; i++) {
+    console.log(decreaseHalfStep(NOTES_SHARPS[i]))
+}
 
 
 
