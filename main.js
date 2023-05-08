@@ -1,15 +1,16 @@
-const NOTES_SHARPS = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
-const NOTES_FLATS = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"];
-const TOTAL_NOTES_COUNT = 12;
-const SHARP_MODE = false;
-const FLAT_MODE = true;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const constants_1 = require("./constants");
+// const NOTES_SHARPS  : string[] = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+// const NOTES_FLATS : string [] = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"]
+// const TOTAL_NOTES_COUNT : number = 12;
 // makes sure that index is in range
 function boundIndex(index) {
-    if (index >= TOTAL_NOTES_COUNT) {
-        return index % TOTAL_NOTES_COUNT;
+    if (index >= constants_1.TOTAL_NOTES_COUNT) {
+        return index % constants_1.TOTAL_NOTES_COUNT;
     }
     else if (index < 0) {
-        return TOTAL_NOTES_COUNT + index;
+        return constants_1.TOTAL_NOTES_COUNT + index;
     }
     return index;
 }
@@ -26,22 +27,22 @@ function halfStep(note, increase, flatMode) {
     if (flat || flatMode) {
         // flat case
         var str = base + (flat ? "b" : "");
-        var index = NOTES_FLATS.indexOf(str);
+        var index = constants_1.NOTES_FLATS.indexOf(str);
         if (index == -1)
             throw new Error("in half step, note not found");
         increase ? index++ : index--;
         index = boundIndex(index);
-        newNote = NOTES_FLATS[index];
+        newNote = constants_1.NOTES_FLATS[index];
     }
     else {
         // sharp case
         var str = base + (sharp ? "#" : "");
-        var index = NOTES_SHARPS.indexOf(str);
+        var index = constants_1.NOTES_SHARPS.indexOf(str);
         if (index == -1)
             throw new Error("in half step, note not found");
         increase ? index++ : index--;
         index = boundIndex(index);
-        newNote = NOTES_SHARPS[index];
+        newNote = constants_1.NOTES_SHARPS[index];
     }
     return newNote;
 }
@@ -64,7 +65,7 @@ function increaseHalfStep(note) {
         var secondNote = increaseHalfStep(note.substring(index + 1));
         return firstNote + "/" + secondNote;
     }
-    var newBaseNote = halfStep(note, true, SHARP_MODE);
+    var newBaseNote = halfStep(note, true, constants_1.SHARP_MODE);
     return addFrillings(newBaseNote, note);
 }
 function decreaseHalfStep(note) {
@@ -74,16 +75,8 @@ function decreaseHalfStep(note) {
         var secondNote = decreaseHalfStep(note.substring(index + 1));
         return firstNote + "/" + secondNote;
     }
-    var newBaseNote = halfStep(note, false, SHARP_MODE);
+    var newBaseNote = halfStep(note, false, constants_1.SHARP_MODE);
     return addFrillings(newBaseNote, note);
-}
-function increaseStep(noteStr, step) {
-    if (noteStr.includes("/")) {
-        var index = noteStr.indexOf("/");
-        var firstNote = increaseHalfStep(noteStr.substring(0, index));
-        var secondNote = increaseHalfStep(noteStr.substring(index + 1));
-        return firstNote + "/" + secondNote;
-    }
 }
 // -------------- TESTING -------------------
 var INCREASING = true;
@@ -93,17 +86,112 @@ var INCREASING = true;
 // for(var i = 0; i < NOTES_SHARPS.length; i++) {
 //     console.log(decreaseHalfStep(NOTES_SHARPS[i]))
 // }
-var testNotes = ['D', 'G', 'Bm', 'A', 'Bm', 'A/C#', 'D', 'G', 'Bm', 'A', 'D',
-    'A', 'Bm', 'A', 'G', 'D/F#', 'A', 'Bm', 'A', 'G', 'D', 'G', 'Bm', 'A', 'Bm',
-    'A/C#', 'D', 'G', 'Bm', 'A', 'D', 'A', 'Bm', 'A', 'G', 'D/F#', 'A', 'Bm', 'A',
-    'G', 'Bm', 'A', 'G', 'G', 'A', 'Bm7', 'F#m', 'G', 'A', 'Bm7', 'A', 'G', 'A', 'Bm7',
-    'F#m7', 'G', 'A', 'Bm7', 'A', 'G', 'A', 'Bm7', 'F#m7', 'G', 'A', 'Bm7', 'A',
-    'D', 'A', 'Bm7', 'A', 'G', 'D/F#', 'A', 'Bm7', 'A', 'G', 'D', 'A', 'Bm', 'A',
-    'G', 'D/F#', 'A', 'Bm7', 'A', 'G', 'G', 'A', 'Bm7', 'F#m7', 'G', 'A', 'Bm7', 'A', 'D',
-    'A', 'Bm', 'A', 'G'];
+var testNotes = [
+    "D",
+    "G",
+    "Bm",
+    "A",
+    "Bm",
+    "A/C#",
+    "D",
+    "G",
+    "Bm",
+    "A",
+    "D",
+    "A",
+    "Bm",
+    "A",
+    "G",
+    "D/F#",
+    "A",
+    "Bm",
+    "A",
+    "G",
+    "D",
+    "G",
+    "Bm",
+    "A",
+    "Bm",
+    "A/C#",
+    "D",
+    "G",
+    "Bm",
+    "A",
+    "D",
+    "A",
+    "Bm",
+    "A",
+    "G",
+    "D/F#",
+    "A",
+    "Bm",
+    "A",
+    "G",
+    "Bm",
+    "A",
+    "G",
+    "G",
+    "A",
+    "Bm7",
+    "F#m",
+    "G",
+    "A",
+    "Bm7",
+    "A",
+    "G",
+    "A",
+    "Bm7",
+    "F#m7",
+    "G",
+    "A",
+    "Bm7",
+    "A",
+    "G",
+    "A",
+    "Bm7",
+    "F#m7",
+    "G",
+    "A",
+    "Bm7",
+    "A",
+    "D",
+    "A",
+    "Bm7",
+    "A",
+    "G",
+    "D/F#",
+    "A",
+    "Bm7",
+    "A",
+    "G",
+    "D",
+    "A",
+    "Bm",
+    "A",
+    "G",
+    "D/F#",
+    "A",
+    "Bm7",
+    "A",
+    "G",
+    "G",
+    "A",
+    "Bm7",
+    "F#m7",
+    "G",
+    "A",
+    "Bm7",
+    "A",
+    "D",
+    "A",
+    "Bm",
+    "A",
+    "G",
+];
 for (var i = 0; i < testNotes.length; i++) {
     console.log(increaseHalfStep(testNotes[i]));
 }
+console.log("askdjf;laksjdflaksjdf;laksjdf;lkajsd;lfkjas;ldfkja;sldkjf");
 /*
 var chordsClassName = "fciXY _Oy28";
 var spans = document.getElementsByClassName(chordsClassName);
@@ -115,4 +203,4 @@ for(var i = 0; i < spans.length; i++) {
 
 
 
-*/ 
+*/
