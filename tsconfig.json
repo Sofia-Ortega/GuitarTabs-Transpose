@@ -1,11 +1,9 @@
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "lib": ["es6", "dom", "es2017"],
-        "target": "es6"
-    },
-    "files": [
-        "main.ts"
-    ]
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "lib": ["es6", "dom", "es2017"],
+    "target": "es6"
+  },
+  "files": ["functions/main.ts", "scripts/content.ts"]
 }

@@ -1,10 +1,10 @@
 {
-    "name": "guitarTabs",
-    "version": "0.1",
-    "description": "google extension to change guitar tabs chords",
-    "main": "main.ts",
-    "scripts": {
-        "test": "echo Hello & echo world",
-        "start": "tsc & node main.js"
-    }
+  "name": "guitarTabs",
+  "version": "0.1",
+  "description": "google extension to change guitar tabs chords",
+  "main": "main.ts",
+  "scripts": {
+    "test": "echo Hello & echo world",
+    "start": "tsc & node main.js"
+  }
 }
