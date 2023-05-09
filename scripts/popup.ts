@@ -6,8 +6,29 @@ increaseBtn?.addEventListener("click", increaseHalfStepPage);
 decreaseBtn?.addEventListener("click", decreaseHalfStepPage);
 helloBtn?.addEventListener("click", printHello);
 
+interface Message {
+  transpose: number;
+}
+
+const TRANSPOSE_UP_HALF_STEP: Message = { transpose: 1 };
+const TRANSPOSE_DOWN_HALF_STEP: Message = { transpose: -1 };
+
+async function sendMessage(msg: Message) {
+  console.log("attempting to send msg: ", msg);
+  const [tab] = await chrome.tabs.query({
+    active: true,
+    lastFocusedWindow: true,
+  });
+
+  const response = await chrome.tabs.sendMessage(tab.id, msg);
+
+  console.log(response);
+  return response;
+}
+
 function increaseHalfStepPage(): void {
   console.log("increase:");
+  sendMessage(TRANSPOSE_UP_HALF_STEP);
   // for (var i = 0; i < spans.length; i++) {
   //   let note: string = spans[i].innerHTML;
   //   console.log(note);
@@ -17,6 +38,7 @@ function increaseHalfStepPage(): void {
 
 function decreaseHalfStepPage(): void {
   console.log("decrease:");
+  sendMessage(TRANSPOSE_DOWN_HALF_STEP);
   // for (var i = 0; i < spans.length; i++) {
   //   let note: string = spans[i].innerHTML;
   //   console.log(note);

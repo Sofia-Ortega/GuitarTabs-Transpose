@@ -13,8 +13,23 @@ const helloBtn = document.getElementById("helloBtn");
 increaseBtn === null || increaseBtn === void 0 ? void 0 : increaseBtn.addEventListener("click", increaseHalfStepPage);
 decreaseBtn === null || decreaseBtn === void 0 ? void 0 : decreaseBtn.addEventListener("click", decreaseHalfStepPage);
 helloBtn === null || helloBtn === void 0 ? void 0 : helloBtn.addEventListener("click", printHello);
+const TRANSPOSE_UP_HALF_STEP = { transpose: 1 };
+const TRANSPOSE_DOWN_HALF_STEP = { transpose: -1 };
+function sendMessage(msg) {
+    return __awaiter(this, void 0, void 0, function* () {
+        console.log("attempting to send msg: ", msg);
+        const [tab] = yield chrome.tabs.query({
+            active: true,
+            lastFocusedWindow: true,
+        });
+        const response = yield chrome.tabs.sendMessage(tab.id, msg);
+        console.log(response);
+        return response;
+    });
+}
 function increaseHalfStepPage() {
     console.log("increase:");
+    sendMessage(TRANSPOSE_UP_HALF_STEP);
     // for (var i = 0; i < spans.length; i++) {
     //   let note: string = spans[i].innerHTML;
     //   console.log(note);
@@ -23,6 +38,7 @@ function increaseHalfStepPage() {
 }
 function decreaseHalfStepPage() {
     console.log("decrease:");
+    sendMessage(TRANSPOSE_DOWN_HALF_STEP);
     // for (var i = 0; i < spans.length; i++) {
     //   let note: string = spans[i].innerHTML;
     //   console.log(note);
