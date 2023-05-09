@@ -6,5 +6,8 @@
   "scripts": {
     "test": "echo Hello & echo world",
     "start": "tsc & node main.js"
+  },
+  "dependencies": {
+    "@types/chrome": "^0.0.235"
   }
 }

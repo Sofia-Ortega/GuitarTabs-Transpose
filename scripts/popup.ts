@@ -24,6 +24,13 @@ function decreaseHalfStepPage(): void {
   // }
 }
 
-function printHello(): void {
+async function printHello() {
   console.log("howdyyyyyyyyy!");
+  const [tab] = await chrome.tabs.query({
+    active: true,
+    lastFocusedWindow: true,
+  });
+  const response = await chrome.tabs.sendMessage(tab.id, { greeting: "hello" });
+
+  console.log(response);
 }
