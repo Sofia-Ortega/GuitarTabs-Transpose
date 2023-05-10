@@ -1,7 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Guitar Tabs Transposer",
-  "version": "0",
+  "name": "Chord Transposer",
+  "description": "Transpose the Chords found in GuitarTabs",
+  "version": "1.0",
   "permissions": ["activeTab"],
   "action": {
     "default_popup": "popup.html"
