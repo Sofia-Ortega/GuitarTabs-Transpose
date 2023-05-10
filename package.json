@@ -2,11 +2,9 @@
   "name": "Transpose GuitarTabs",
   "description": "Google extension to transpose GuitarTabs",
   "version": "0.1",
-  "description": "google extension to change guitar tabs chords",
   "main": "main.ts",
   "scripts": {
-    "test": "echo Hello & echo world",
-    "start": "tsc & node main.js"
+    "test": "echo Hello & echo world"
   },
   "dependencies": {
     "@types/chrome": "^0.0.235"
