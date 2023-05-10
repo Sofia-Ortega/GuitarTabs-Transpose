@@ -9,7 +9,7 @@
   "host_permissions": ["https://tabs.ultimate-guitar.com/tab/*"],
   "content_scripts": [
     {
-      "js": ["scripts/content.js"],
+      "js": ["assets/js/content.js"],
       "matches": ["https://tabs.ultimate-guitar.com/tab/*"]
     }
   ]

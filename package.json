@@ -1,5 +1,6 @@
 {
-  "name": "guitarTabs",
+  "name": "Transpose GuitarTabs",
+  "description": "Google extension to transpose GuitarTabs",
   "version": "0.1",
   "description": "google extension to change guitar tabs chords",
   "main": "main.ts",

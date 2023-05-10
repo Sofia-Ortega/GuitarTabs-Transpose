@@ -30,20 +30,10 @@ function sendMessage(msg) {
 function increaseHalfStepPage() {
     console.log("increase:");
     sendMessage(TRANSPOSE_UP_HALF_STEP);
-    // for (var i = 0; i < spans.length; i++) {
-    //   let note: string = spans[i].innerHTML;
-    //   console.log(note);
-    // spans[i].innerHTML = increaseHalfStep(note);
-    // }
 }
 function decreaseHalfStepPage() {
     console.log("decrease:");
     sendMessage(TRANSPOSE_DOWN_HALF_STEP);
-    // for (var i = 0; i < spans.length; i++) {
-    //   let note: string = spans[i].innerHTML;
-    //   console.log(note);
-    // spans[i].innerHTML = decreaseHalfStep(note);
-    // }
 }
 function printHello() {
     return __awaiter(this, void 0, void 0, function* () {

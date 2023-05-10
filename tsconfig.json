@@ -5,5 +5,5 @@
     "lib": ["es6", "dom", "es2017"],
     "target": "es6"
   },
-  "files": ["functions/main.ts", "scripts/content.ts", "scripts/popup.ts"]
+  "files": ["assets/js/content.ts", "assets/js/popup.ts"]
 }
