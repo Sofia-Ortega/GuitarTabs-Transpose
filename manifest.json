@@ -6,6 +6,11 @@
   "action": {
     "default_popup": "popup.html"
   },
+  "icons": {
+    "16": "assets/images/icon16.png",
+    "48": "assets/images/icon48.png",
+    "128": "assets/images/icon128.png"
+  },
   "host_permissions": ["https://tabs.ultimate-guitar.com/tab/*"],
   "content_scripts": [
     {

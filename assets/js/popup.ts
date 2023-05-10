@@ -1,11 +1,12 @@
+// ------------------------ DOM Elements --------------------------
 const increaseBtn: HTMLElement | null = document.getElementById("increaseBtn");
 const decreaseBtn: HTMLElement | null = document.getElementById("decreaseBtn");
-const helloBtn: HTMLElement | null = document.getElementById("helloBtn");
+const counter: HTMLElement | null = document.getElementById("counter");
 
 increaseBtn?.addEventListener("click", increaseHalfStepPage);
 decreaseBtn?.addEventListener("click", decreaseHalfStepPage);
-helloBtn?.addEventListener("click", printHello);
 
+// ----------------------- Constants -------------------------------
 interface Message {
   transpose: number;
 }
@@ -13,7 +14,8 @@ interface Message {
 const TRANSPOSE_UP_HALF_STEP: Message = { transpose: 1 };
 const TRANSPOSE_DOWN_HALF_STEP: Message = { transpose: -1 };
 
-async function sendMessage(msg: Message) {
+// ------------------ Helper Function -------------------
+async function sendMessageToContent(msg: Message) {
   console.log("attempting to send msg: ", msg);
   const [tab] = await chrome.tabs.query({
     active: true,
@@ -26,23 +28,19 @@ async function sendMessage(msg: Message) {
   return response;
 }
 
+// -------------------- Button Functions -------------------
 function increaseHalfStepPage(): void {
+  var currentValue = parseInt(counter.innerHTML);
+  counter.innerHTML = (currentValue + 1).toString();
+
   console.log("increase:");
-  sendMessage(TRANSPOSE_UP_HALF_STEP);
+  sendMessageToContent(TRANSPOSE_UP_HALF_STEP);
 }
 
 function decreaseHalfStepPage(): void {
+  var currentValue = parseInt(counter.innerHTML);
+  counter.innerHTML = (currentValue - 1).toString();
+
   console.log("decrease:");
-  sendMessage(TRANSPOSE_DOWN_HALF_STEP);
-}
-
-async function printHello() {
-  console.log("howdyyyyyyyyy!");
-  const [tab] = await chrome.tabs.query({
-    active: true,
-    lastFocusedWindow: true,
-  });
-  const response = await chrome.tabs.sendMessage(tab.id, { greeting: "hello" });
-
-  console.log(response);
+  sendMessageToContent(TRANSPOSE_DOWN_HALF_STEP);
 }
